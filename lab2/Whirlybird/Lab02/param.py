@@ -24,6 +24,10 @@ ell =  5      # For the axis, m
 Ts = 0.01 
 
 # Initial Conditions
-phi0 = 0.0*np.pi/180    # Roll of Whirlybird relative to the ground, rads
-theta0 = 0.0*np.pi/180  # Pitch of Whirlybird relative to the ground, rads
+phi0 = 0.0*np.pi/180    # Pitch of Whirlybird relative to the ground, rads
+phidot0 = 0.0           # Derivative of the pitch
+theta0 = 0.0*np.pi/180  # Roll of Whirlybird relative to the ground, rads
+thetadot0 = 0.0         # Derivative of the roll
 psi0 = 0.0*np.pi/180    # Yaw of Whirlybird relative to the ground, rads
+psidot0 = 0.0           # Derivative of the yaw
+
