@@ -19,14 +19,11 @@ class WhirlybirdDynamics:
         # P.Ts is the time step between function calls.
         # u contains the force and/or torque input(s).
 
-        # Call our convertForces function from main.py and store in F
-        F = convertForces(u)
-                               
         # RK4 integration
-        k1 = self.Derivatives(self.state, F)
-        k2 = self.Derivatives(self.state + P.Ts/2*k1, F)
-        k3 = self.Derivatives(self.state + P.Ts/2*k2,F)
-        k4 = self.Derivatives(self.state + P.Ts*k3, F)
+        k1 = self.Derivatives(self.state, u)
+        k2 = self.Derivatives(self.state + P.Ts/2*k1, u)
+        k3 = self.Derivatives(self.state + P.Ts/2*k2,u)
+        k4 = self.Derivatives(self.state + P.Ts*k3, u)
         self.state += P.Ts/6 * (k1 + 2*k2 + 2*k3 + k4)
 
 
@@ -68,10 +65,10 @@ class WhirlybirdDynamics:
                        [0,              (m1*(L1**2))+(m2*(L2**2))+(Jy*(cphi**2))+(Jz*(sphi**2)), (Jy-Jz)*sphi*cphi*ctheta],
                        [-Jx*stheta,   (Jy-Jz)*sphi*cphi*ctheta,                                        ((m1*(L1**2))+(m2*(L2**2))+(Jy*(sphi**2))+(Jz*(cphi**2)))*(ctheta**2)+(Jx*(stheta**2))]])
 
-        C = np.matrix([[-(thetadot**2)*(P.Jz-P.Jy)*sphi*cphi+(psidot**2)(P.Jz-P.Jy)*sphi*cphi*(ctheta**2)-thetadot*psidot*ctheta(P.Jx-(P.Jz-P.Jy)((cphi**2)-(sphi**2)))],
-                       [(psidot**2)*stheta*ctheta*(-P.Jx+P.m1*(P.L1**2)+P.m2*(P.L2**2)+P.Jy*(sphi**2)+P.Jz*(cphi**2))-2*phidot*thetadot*(P.Jz-P.Jy)*sphi*cphi-phidot*psidot*ctheta*(-P.Jx+(P.Jz-P.Jy)*((cphi**2)-(sphi**2)))],
-                       [(thetadot**2)*(P.Jz-P.Jy)*sphi*cphi*stheta-phidot*thetadot*ctheta*(P.Jx+(P.Jz-P.Jy)*((cphi**2)-(sphi**2)))\
-                        -2*phidot*psidot*(P.Jz-P.Jy)*(ctheta**2)*sphi*cphi+2*thetadot*psidot*stheta*ctheta*(P.Jx-P.m1*(P.L1**2)-P.m2*(P.L2**2)-P.Jy*(sphi**2)-P.Jz(cphi**2))]])
+        C = np.matrix([[-(thetadot**2)*(Jz-Jy)*sphi*cphi+(psidot**2)(Jz-Jy)*sphi*cphi*(ctheta**2)-thetadot*psidot*ctheta(Jx-(Jz-Jy)((cphi**2)-(sphi**2)))],
+                       [(psidot**2)*stheta*ctheta*(-Jx+m1*(L1**2)+m2*(L2**2)+Jy*(sphi**2)+Jz*(cphi**2))-2*phidot*thetadot*(Jz-Jy)*sphi*cphi-phidot*psidot*ctheta*(-Jx+(Jz-Jy)*((cphi**2)-(sphi**2)))],
+                       [(thetadot**2)*(Jz-Jy)*sphi*cphi*stheta-phidot*thetadot*ctheta*(Jx+(Jz-Jy)*((cphi**2)-(sphi**2)))\
+                        -2*phidot*psidot*(Jz-Jy)*(ctheta**2)*sphi*cphi+2*thetadot*psidot*stheta*ctheta*(Jx-m1*(L1**2)-m2*(L2**2)-Jy*(sphi**2)-Jz(cphi**2))]])
 
 
         deltaP_deltaQ = np.matrix([[0],
