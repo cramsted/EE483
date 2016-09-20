@@ -42,10 +42,10 @@ class Sliders:
         # Instantiate objects here
         self.Sf = mySlider(num_of_sliders = self.num_of_sliders,
             slider_number = 1, maxV = 10.44, minV = 0, intV =5.22,
-            gain = .1, name ='force/F')
+            gain = 1, name ='force/F')
         self.Stau = mySlider(num_of_sliders = self.num_of_sliders,
-            slider_number = 2, maxV = 10.44,minV = 0,intV =0,
-            gain = .1, name ='torque/tau')
+            slider_number = 2, maxV = 10,minV = -10.0,intV =0,
+            gain = 1, name ='torque/tau')
 
         ################################################################
 

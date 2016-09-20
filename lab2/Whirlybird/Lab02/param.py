@@ -3,7 +3,7 @@ import numpy as np
 
 # From parameters list of the Whirlybird lab documentation
 g = 9.81       # Gravity, m/s**2
-L1 = 0.81      # Length of rod from vertex to the rotors, m
+L1 = 0.85      # Length of rod from vertex to the rotors, m
 L2 = 0.3048    # Length of rod from vertex to counterbalance, m
 m1 = 0.891     # Mass of weight at the end of l1 (between the rotors), kg
 m2 = 1.00      # Mass of counterbalance at the end of l2, kg
@@ -21,7 +21,7 @@ Jz = 0.0041    # Some force in z direction???, kg-m^2
 ell =  5      # For the axis, m
 
 # Simulation Parameters
-Ts = 0.01 
+Ts = 0.01
 
 # Initial Conditions
 phi0 = 0.0*np.pi/180    # Pitch of Whirlybird relative to the ground, rads
@@ -30,4 +30,3 @@ theta0 = 0.0*np.pi/180  # Roll of Whirlybird relative to the ground, rads
 thetadot0 = 0.0         # Derivative of the roll
 psi0 = 0.0*np.pi/180    # Yaw of Whirlybird relative to the ground, rads
 psidot0 = 0.0           # Derivative of the yaw
-

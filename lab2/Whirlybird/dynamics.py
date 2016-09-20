@@ -1,4 +1,4 @@
-import numpy as np 
+import numpy as np
 import param as P
 
 
@@ -33,13 +33,13 @@ class WhirlybirdDynamics:
         # States and forces
         phi = state.item(0)
         theta = state.item(1)
-        psi = state.item(2)      
+        psi = state.item(2)
         phidot = state.item(3)
         thetadot = state.item(4)
         psidot = state.item(5)
         fl = u[0]                   # make sure fl is from our main file function
         fr = u[1]
-
+        # import pdb; pdb.set_trace()
         # ctheta and stheta are used multiple times. They are
         # precomputed and stored in another variable to increase
         # efficiency.
@@ -65,10 +65,10 @@ class WhirlybirdDynamics:
                        [0,              (m1*(L1**2))+(m2*(L2**2))+(Jy*(cphi**2))+(Jz*(sphi**2)), (Jy-Jz)*sphi*cphi*ctheta],
                        [-Jx*stheta,   (Jy-Jz)*sphi*cphi*ctheta,                                        ((m1*(L1**2))+(m2*(L2**2))+(Jy*(sphi**2))+(Jz*(cphi**2)))*(ctheta**2)+(Jx*(stheta**2))]])
 
-        C = np.matrix([[-(thetadot**2)*(Jz-Jy)*sphi*cphi+(psidot**2)(Jz-Jy)*sphi*cphi*(ctheta**2)-thetadot*psidot*ctheta(Jx-(Jz-Jy)((cphi**2)-(sphi**2)))],
+        C = np.matrix([[-(thetadot**2)*(Jz-Jy)*sphi*cphi+(psidot**2)*(Jz-Jy)*sphi*cphi*(ctheta**2)-thetadot*psidot*ctheta*(Jx-(Jz-Jy)*((cphi**2)-(sphi**2)))],
                        [(psidot**2)*stheta*ctheta*(-Jx+m1*(L1**2)+m2*(L2**2)+Jy*(sphi**2)+Jz*(cphi**2))-2*phidot*thetadot*(Jz-Jy)*sphi*cphi-phidot*psidot*ctheta*(-Jx+(Jz-Jy)*((cphi**2)-(sphi**2)))],
                        [(thetadot**2)*(Jz-Jy)*sphi*cphi*stheta-phidot*thetadot*ctheta*(Jx+(Jz-Jy)*((cphi**2)-(sphi**2)))\
-                        -2*phidot*psidot*(Jz-Jy)*(ctheta**2)*sphi*cphi+2*thetadot*psidot*stheta*ctheta*(Jx-m1*(L1**2)-m2*(L2**2)-Jy*(sphi**2)-Jz(cphi**2))]])
+                        -2*phidot*psidot*(Jz-Jy)*(ctheta**2)*sphi*cphi+2*thetadot*psidot*stheta*ctheta*(Jx-m1*(L1**2)-m2*(L2**2)-Jy*(sphi**2)-Jz*(cphi**2))]])
 
 
         deltaP_deltaQ = np.matrix([[0],
@@ -85,7 +85,7 @@ class WhirlybirdDynamics:
         phiddot = qddot.item(0)
         thetaddot = qddot.item(1)
         psiddot = qddot.item(2)
-                      
+
         xdot = np.matrix([[phidot],[thetadot],[psidot],[phiddot],[thetaddot],[psiddot]])
 
         return xdot

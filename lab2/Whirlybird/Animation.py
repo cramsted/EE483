@@ -72,7 +72,7 @@ class WhirlybirdAnimation:
 		phi = u[0]
 		theta = u[1]
 		psi = u[2]
-
+		# import pdb; pdb.set_trace()
 		X = [0, 0]
 		Y = [0, 0]
 		Z = [0, -P.h]
@@ -117,12 +117,12 @@ def rotate(XYZ,phi,theta,psi):
 
     # Define rotation matrix
     R_roll = np.matrix([[1,           0,            0],
-            			[0, np.cos(phi), -np.sin(phi)],
-            			[0, np.sin(phi), np.cos(phi)]])
+            			[0, np.cos(theta), -np.sin(theta)],
+            			[0, np.sin(theta), np.cos(theta)]])
 
-    R_pitch = np.matrix([[ np.cos(theta), 0, np.sin(theta)],
+    R_pitch = np.matrix([[ np.cos(phi), 0, np.sin(phi)],
             			 [0,              1,             0],
-            			 [-np.sin(theta), 0, np.cos(theta)]])
+            			 [-np.sin(phi), 0, np.cos(phi)]])
 
     R_yaw = np.matrix([[np.cos(psi),-np.sin(psi), 0],
             		   [np.sin(psi), np.cos(psi), 0],
