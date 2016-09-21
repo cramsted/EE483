@@ -117,8 +117,8 @@ def rotate(XYZ,phi,theta,psi):
 
     # Define rotation matrix
     R_roll = np.matrix([[1,           0,            0],
-            			[0, np.cos(theta), -np.sin(theta)],
-            			[0, np.sin(theta), np.cos(theta)]])
+            			[0, np.cos(-theta), -np.sin(-theta)],
+            			[0, np.sin(-theta), np.cos(-theta)]])
 
     R_pitch = np.matrix([[ np.cos(phi), 0, np.sin(phi)],
             			 [0,              1,             0],
@@ -127,7 +127,7 @@ def rotate(XYZ,phi,theta,psi):
     R_yaw = np.matrix([[np.cos(psi),-np.sin(psi), 0],
             		   [np.sin(psi), np.cos(psi), 0],
             		   [0,                     0, 1]])
-    R = R_yaw*R_roll*R_pitch;
+    R = R_roll*R_pitch*R_yaw;
 
     # rotate vertices
     XYZ = R*XYZ
